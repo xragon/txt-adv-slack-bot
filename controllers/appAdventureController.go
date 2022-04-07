@@ -20,13 +20,13 @@ func NewAppAdventureController(eventhandler *socketmode.SocketmodeHandler) AppAd
 
 	c.EventHandler.HandleEventsAPI(
 		slackevents.Message,
-		c.respondToMessage,
+		c.processMessage,
 	)
 
 	return c
 }
 
-func (c *AppAdventureController) respondToMessage(evt *socketmode.Event, clt *socketmode.Client) {
+func (c *AppAdventureController) processMessage(evt *socketmode.Event, clt *socketmode.Client) {
 	// we need to cast our socketmode.Event into slackevents.AppHomeOpenedEvent
 	evt_api, ok := evt.Data.(slackevents.EventsAPIEvent)
 
@@ -42,15 +42,26 @@ func (c *AppAdventureController) respondToMessage(evt *socketmode.Event, clt *so
 		log.Printf("ERROR converting event to slackevents.MessageEvent: %v", ok)
 	}
 
-	if evt_app_message.User != "U03AN9C3NV7" {
-		_, _, err := clt.GetApiClient().PostMessage(
-			evt_app_message.Channel,
-			slack.MsgOptionText("Hello World", false),
-		)
+	if evt_app_message.User == "U03AN9C3NV7" {
+		return // do nothing if bots own message
+	}
 
-		//Handle errors
-		if err != nil {
-			log.Printf("ERROR publishHomeTabView: %v", err)
-		}
+	command := evt_app_message.Text
+	log.Printf("command is: %v", command)
+	switch command {
+	case "n":
+		respondToMessage(clt, "you went north", evt_app_message.Channel)
+	}
+}
+
+func respondToMessage(clt *socketmode.Client, message string, channel string) {
+	log.Printf("respondToMessage Triggered")
+	_, _, err := clt.GetApiClient().PostMessage(
+		channel,
+		slack.MsgOptionText(message, false),
+	)
+	//Handle errors
+	if err != nil {
+		log.Printf("ERROR publishHomeTabView: %v", err)
 	}
 }

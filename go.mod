@@ -3,7 +3,6 @@ module github.com/xragon/txt-adv-slack-bot
 go 1.17
 
 require (
-	github.com/joho/godotenv v1.4.0
 	github.com/rs/zerolog v1.26.1
 	github.com/slack-go/slack v0.10.2
 )

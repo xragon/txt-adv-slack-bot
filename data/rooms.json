@@ -1,0 +1,24 @@
+[
+    {
+        "id": "room_001",
+        "description": "This is the southern room, its warm in here",
+        "Exits": [
+            {
+                "DirectionKey": "N",
+                "Description": "There is a room to the North",
+                "Destination": "room_002"
+            }
+        ]
+    },
+    {
+        "Id": "room_002",
+        "Description": "This is the Northern room, its cool in here",
+        "Exits": [
+            {
+                "DirectionKey": "S",
+                "Description": "There is a room to the South",
+                "Destination": "room_001"
+            }
+        ]
+    }
+]

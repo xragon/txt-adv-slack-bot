@@ -57,6 +57,20 @@ type Exits struct {
 	Destination string // destination key/id
 }
 
+type Players struct {
+	Players map[string]Player
+}
+
+type Player struct {
+	Name      string
+	CurrentRooom string
+}
+
+type GameState struct {
+	Players map[string]Player
+	Rooms   []Rooms
+}
+
 func (c *AppAdventureController) processMessage(evt *socketmode.Event, clt *socketmode.Client) {
 	// we need to cast our socketmode.Event into slackevents.MessageEvent
 	evt_api, ok := evt.Data.(slackevents.EventsAPIEvent)

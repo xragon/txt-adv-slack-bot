@@ -8,5 +8,5 @@ Currently using code added in <https://github.com/slack-go/slack/pull/904> which
 
 <details>
     <summary>Map Diagram (Spoiler warning)</summary>
-    ![map diagram for the adventure](https://github.com/xragon/txt-adv-slack-bot/documents/map_diagram.png)
+    [map diagram for the adventure](documents/map_diagram.png)
 </details>

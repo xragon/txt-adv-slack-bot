@@ -1,38 +1,26 @@
 package controllers
 
 import (
-	"encoding/json"
-	"io/ioutil"
 	"log"
 
 	"github.com/slack-go/slack"
 	"github.com/slack-go/slack/slackevents"
-
 	"github.com/slack-go/slack/socketmode"
+	"github.com/xragon/txt-adv-slack-bot/adventure"
 )
 
 // We create a sctucture to let us use dependency injection
 type AppAdventureController struct {
 	EventHandler *socketmode.SocketmodeHandler
-	Rooms        []Rooms
+	GameState    adventure.GameState
 }
 
 func NewAppAdventureController(eventhandler *socketmode.SocketmodeHandler) AppAdventureController {
-	file, err := ioutil.ReadFile("data/rooms.json")
-	if err != nil {
-		log.Printf("ERROR ReadFile: %v", err)
-	}
 
 	c := AppAdventureController{
 		EventHandler: eventhandler,
+		GameState:    adventure.NewAdventure(),
 	}
-
-	err = json.Unmarshal([]byte(file), &c.Rooms)
-	if err != nil {
-		log.Printf("ERROR unmarshal: %v", err)
-	}
-
-	log.Printf("ERROR unmarshal: %v", c.Rooms)
 
 	c.EventHandler.HandleEventsAPI(
 		slackevents.Message,
@@ -40,35 +28,6 @@ func NewAppAdventureController(eventhandler *socketmode.SocketmodeHandler) AppAd
 	)
 
 	return c
-}
-
-type Rooms struct {
-	ID          string // guid?
-	Description string
-	Exits       []Exits
-}
-
-// Exits:  n,e,s,w [10        ,11,0,34] ? zero as null/nothing?
-// Exits2: array/slice of type exits, allowing for 0 to n exits from a room.
-
-type Exits struct {
-	Key         string // eg nrth/n
-	Description string
-	Destination string // destination key/id
-}
-
-type Players struct {
-	Players map[string]Player
-}
-
-type Player struct {
-	Name      string
-	CurrentRooom string
-}
-
-type GameState struct {
-	Players map[string]Player
-	Rooms   []Rooms
 }
 
 func (c *AppAdventureController) processMessage(evt *socketmode.Event, clt *socketmode.Client) {
@@ -93,10 +52,13 @@ func (c *AppAdventureController) processMessage(evt *socketmode.Event, clt *sock
 
 	command := evt_app_message.Text
 	log.Printf("command is: %v", command)
-	switch command {
-	case "n":
-		respondToMessage(clt, "you went north", evt_app_message.Channel)
-	}
+
+	respondToMessage(clt, c.GameState.ProcessCommand(evt_app_message.User, command), evt_app_message.Channel)
+
+	// switch command {
+	// case "n":
+	// 	respondToMessage(clt, "you went north", evt_app_message.Channel)
+	// }
 }
 
 func respondToMessage(clt *socketmode.Client, message string, channel string) {

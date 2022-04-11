@@ -1,5 +1,5 @@
 {
-    "room_001": {
+    "1A": {
         "id": "room_001",
         "description": "This is the southern room, its warm in here",
         "Exits": {
@@ -9,13 +9,243 @@
             }
         }
     },
-    "room_002": {
+    "2A": {
         "Id": "room_002",
         "Description": "This is the Northern room, its cool in here",
         "Exits": {
             "s": {
                 "Description": "There is a room to the South",
                 "Destination": "room_001"
+            }
+        }
+    },
+    "3A": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "4A": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "5A": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "1B": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "2B": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "3B": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "4B": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "5B": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "1C": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "2C": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "3C": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "4C": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "5C": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "1D": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "2D": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "3D": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "4D": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "5D": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "1E": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "2E": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "3E": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "4E": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
+            }
+        }
+    },
+    "5E": {
+        "Id": "",
+        "Description": "",
+        "Exits": {
+            "": {
+                "Description": "",
+                "Destination": ""
             }
         }
     }

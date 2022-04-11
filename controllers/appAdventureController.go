@@ -54,11 +54,6 @@ func (c *AppAdventureController) processMessage(evt *socketmode.Event, clt *sock
 	log.Printf("command is: %v", command)
 
 	respondToMessage(clt, c.GameState.ProcessCommand(evt_app_message.User, command), evt_app_message.Channel)
-
-	// switch command {
-	// case "n":
-	// 	respondToMessage(clt, "you went north", evt_app_message.Channel)
-	// }
 }
 
 func respondToMessage(clt *socketmode.Client, message string, channel string) {
@@ -69,6 +64,6 @@ func respondToMessage(clt *socketmode.Client, message string, channel string) {
 	)
 	//Handle errors
 	if err != nil {
-		log.Printf("ERROR publishHomeTabView: %v", err)
+		log.Printf("ERROR respondToMessage: %v", err)
 	}
 }

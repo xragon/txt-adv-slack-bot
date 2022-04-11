@@ -5,53 +5,49 @@ import (
 	"io/ioutil"
 	"log"
 	"reflect"
+	"strings"
 )
 
 type GameState struct {
-	Players
-	Rooms []Rooms
+	Players map[string]Player
+	Rooms   map[string]Room
 }
 
-type Rooms struct {
-	ID          string // guid?
+type Room struct {
 	Description string
-	Exits       []Exits
+	Exits       map[string]Exit
 }
 
-// Exits:  n,e,s,w [10        ,11,0,34] ? zero as null/nothing?
-// Exits2: array/slice of type exits, allowing for 0 to n exits from a room.
-
-type Exits struct {
-	Key         string // eg nrth/n
+type Exit struct {
 	Description string
 	Destination string // destination key/id
 }
 
-type Players struct {
-	Players map[string]Player
-}
-
 type Player struct {
-	Name         string
-	CurrentRooom string
+	Name        string
+	CurrentRoom string
 }
 
 func NewAdventure() GameState {
-	var rooms Rooms
+	var gs GameState
 	file, err := ioutil.ReadFile("data/rooms.json")
 	if err != nil {
 		log.Printf("ERROR Reading Rooms File: %v", err)
 	}
 
-	err = json.Unmarshal([]byte(file), &rooms)
+	err = json.Unmarshal([]byte(file), &gs.Rooms)
 	if err != nil {
 		log.Printf("ERROR unmarshal: %v", err)
 	}
 
-	log.Printf("ERROR unmarshal: %v", rooms)
+	file, err = ioutil.ReadFile("data/players.json")
+	if err != nil {
+		log.Printf("ERROR Reading Rooms File: %v", err)
+	}
 
-	gs := GameState{
-		Rooms: rooms,
+	err = json.Unmarshal([]byte(file), &gs.Players)
+	if err != nil {
+		log.Printf("ERROR unmarshal: %v", err)
 	}
 
 	return gs
@@ -59,33 +55,32 @@ func NewAdventure() GameState {
 
 func (gs *GameState) ProcessCommand(u string, cmd string) string {
 	moves := []string{"north", "n", "east", "e", "south", "s", "west", "w"}
-	// type move struct {
-	// 	North []string
-	// 	East  []string
-	// 	South []string
-	// 	West  []string
-	// }
+	r := "Command Not Understood"
 
-	// gameMoves := new(move)
+	player := gs.Players[u]
+	log.Printf("PLAYER ProcessCommand: %v", player)
 
-	// gameMoves.North = append(gameMoves.North, "North", "n")
-	// gameMoves.East = append(gameMoves.North, "East", "e")
-	// gameMoves.South = append(gameMoves.North, "South", "s")
-	// gameMoves.West = append(gameMoves.North, "West", "w")
+	room := gs.Rooms[player.CurrentRoom]
+	log.Printf("ROOM ProcessCommand: %v", room)
+	log.Printf("Exits ProcessCommand: %v", room.Exits)
 
 	if itemExists(moves, cmd) {
-		player := gs.Players.Players[u]
 
-		room := gs.Rooms
+		r = "You move " + cmd + ". You have entered: " + room.Description
 	}
 
-	return cmd
+	if cmd == "look" {
+		r = room.Description + ". There are exits to " + room.listExists()
+	}
+
+	log.Printf("Response ProcessCommand: %v", r)
+	return r
 }
 
 func itemExists(arrayType interface{}, item interface{}) bool {
 	arr := reflect.ValueOf(arrayType)
 
-	if arr.Kind() != reflect.Array {
+	if arr.Kind() != reflect.Slice {
 		return false
 	}
 
@@ -96,4 +91,13 @@ func itemExists(arrayType interface{}, item interface{}) bool {
 	}
 
 	return false
+}
+
+func (r *Room) listExists() string {
+	log.Printf("Exits: %v", r.Exits)
+	exits := make([]string, 0, len(r.Exits))
+	for k := range r.Exits {
+		exits = append(exits, k)
+	}
+	return strings.Join(exits, ",")
 }

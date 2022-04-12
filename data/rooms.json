@@ -1,26 +1,23 @@
 {
     "1A": {
-        "id": "room_001",
-        "description": "This is the southern room, its warm in here",
+        "Description": "This is the southern room, its warm in here",
         "Exits": {
             "n": {
                 "Description": "There is a room to the North",
-                "Destination": "room_002"
+                "Destination": "2A"
             }
         }
     },
     "2A": {
-        "Id": "room_002",
         "Description": "This is the Northern room, its cool in here",
         "Exits": {
             "s": {
                 "Description": "There is a room to the South",
-                "Destination": "room_001"
+                "Destination": "1A"
             }
         }
     },
     "3A": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -30,7 +27,6 @@
         }
     },
     "4A": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -40,7 +36,6 @@
         }
     },
     "5A": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -50,7 +45,6 @@
         }
     },
     "1B": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -60,7 +54,6 @@
         }
     },
     "2B": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -70,7 +63,6 @@
         }
     },
     "3B": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -80,7 +72,6 @@
         }
     },
     "4B": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -90,7 +81,6 @@
         }
     },
     "5B": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -100,7 +90,6 @@
         }
     },
     "1C": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -110,7 +99,6 @@
         }
     },
     "2C": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -120,7 +108,6 @@
         }
     },
     "3C": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -130,7 +117,6 @@
         }
     },
     "4C": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -140,7 +126,6 @@
         }
     },
     "5C": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -150,7 +135,6 @@
         }
     },
     "1D": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -160,7 +144,6 @@
         }
     },
     "2D": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -170,7 +153,6 @@
         }
     },
     "3D": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -180,7 +162,6 @@
         }
     },
     "4D": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -190,7 +171,6 @@
         }
     },
     "5D": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -200,7 +180,6 @@
         }
     },
     "1E": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -210,7 +189,6 @@
         }
     },
     "2E": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -220,7 +198,6 @@
         }
     },
     "3E": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -230,7 +207,6 @@
         }
     },
     "4E": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {
@@ -240,7 +216,6 @@
         }
     },
     "5E": {
-        "Id": "",
         "Description": "",
         "Exits": {
             "": {

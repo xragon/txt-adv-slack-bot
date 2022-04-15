@@ -9,8 +9,8 @@ import (
 )
 
 type GameState struct {
-	Players map[string]Player
-	Rooms   map[string]Room
+	Players map[string]*Player
+	Rooms   map[string]*Room
 }
 
 type Room struct {
@@ -29,6 +29,7 @@ type Player struct {
 }
 
 func NewAdventure() GameState {
+	log.Printf("NEW ADVENTURE!!!")
 	var gs GameState
 	file, err := ioutil.ReadFile("data/rooms.json")
 	if err != nil {
@@ -65,7 +66,19 @@ func (gs *GameState) ProcessCommand(u string, cmd string) string {
 	log.Printf("Exits ProcessCommand: %v", room.Exits)
 
 	if itemExists(moves, cmd) {
+		switch cmd {
+		case "north", "n":
+			player.move("n", room)
+		case "east", "e":
+			player.move("e", room)
+		case "south", "s":
+			player.move("s", room)
+		case "west", "w":
+			player.move("w", room)
+		}
 
+		room = gs.Rooms[player.CurrentRoom]
+		log.Printf("ROOM ProcessCommand: %v", &room)
 		r = "You move " + cmd + ". You have entered: " + room.Description
 	}
 
@@ -91,6 +104,20 @@ func itemExists(arrayType interface{}, item interface{}) bool {
 	}
 
 	return false
+}
+
+// func (gs *GameState) move(cmd string, u string, r Room) {
+// 	newRoom := r.Exits[cmd]
+// 	if newRoom != (Exit{}) {
+// 		gs.Players[u].CurrentRoom = newRoom.Destination
+// 	}
+// }
+
+func (p *Player) move(cmd string, r Room) {
+	newRoom := r.Exits[cmd]
+	if newRoom != (Exit{}) {
+		p.CurrentRoom = newRoom.Destination
+	}
 }
 
 func (r *Room) listExists() string {

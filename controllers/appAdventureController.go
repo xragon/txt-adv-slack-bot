@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"log"
+	"strings"
 
 	"github.com/slack-go/slack"
 	"github.com/slack-go/slack/slackevents"
@@ -16,6 +17,8 @@ type AppAdventureController struct {
 }
 
 func NewAppAdventureController(eventhandler *socketmode.SocketmodeHandler) AppAdventureController {
+
+	log.Printf("NEW CONTROLLER!!!")
 
 	c := AppAdventureController{
 		EventHandler: eventhandler,
@@ -46,14 +49,15 @@ func (c *AppAdventureController) processMessage(evt *socketmode.Event, clt *sock
 		log.Printf("ERROR converting event to slackevents.MessageEvent: %v", ok)
 	}
 
-	if evt_app_message.User == "U03AN9C3NV7" {
+	// "U03AN9C3NV7"
+	if evt_app_message.User == "U03C11FNTH7" {
 		return // do nothing if bots own message
 	}
 
 	command := evt_app_message.Text
 	log.Printf("command is: %v", command)
 
-	respondToMessage(clt, c.GameState.ProcessCommand(evt_app_message.User, command), evt_app_message.Channel)
+	respondToMessage(clt, c.GameState.ProcessCommand(evt_app_message.User, strings.ToLower(command)), evt_app_message.Channel)
 }
 
 func respondToMessage(clt *socketmode.Client, message string, channel string) {

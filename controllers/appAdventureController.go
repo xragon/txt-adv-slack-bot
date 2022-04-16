@@ -57,7 +57,7 @@ func (c *AppAdventureController) processMessage(evt *socketmode.Event, clt *sock
 	command := evt_app_message.Text
 	log.Printf("command is: %v", command)
 
-	respondToMessage(clt, c.GameState.ProcessCommand(evt_app_message.User, strings.ToLower(command)), evt_app_message.Channel)
+	respondWithBlock(clt, c.GameState.ProcessCommand(evt_app_message.User, strings.ToLower(command)), evt_app_message.Channel)
 }
 
 func respondToMessage(clt *socketmode.Client, message string, channel string) {
@@ -66,8 +66,19 @@ func respondToMessage(clt *socketmode.Client, message string, channel string) {
 		channel,
 		slack.MsgOptionText(message, false),
 	)
-	//Handle errors
+
 	if err != nil {
 		log.Printf("ERROR respondToMessage: %v", err)
+	}
+}
+
+func respondWithBlock(clt *socketmode.Client, blocks []slack.Block, channel string) {
+	_, _, err := clt.GetApiClient().PostMessage(
+		channel,
+		slack.MsgOptionBlocks(blocks...),
+	)
+
+	if err != nil {
+		log.Printf("ERROR postGreetingMessage: %v", err)
 	}
 }

@@ -6,6 +6,8 @@ import (
 	"log"
 	"reflect"
 	"strings"
+
+	"github.com/slack-go/slack"
 )
 
 type GameState struct {
@@ -54,7 +56,7 @@ func NewAdventure() GameState {
 	return gs
 }
 
-func (gs *GameState) ProcessCommand(u string, cmd string) string {
+func (gs *GameState) ProcessCommand(u string, cmd string) []slack.Block {
 	moves := []string{"north", "n", "east", "e", "south", "s", "west", "w"}
 	r := "Command Not Understood"
 
@@ -83,11 +85,12 @@ func (gs *GameState) ProcessCommand(u string, cmd string) string {
 	}
 
 	if cmd == "look" {
-		r = room.Description + ". There are exits to " + room.listExists()
+		blocks := RoomMessage(*room)
+		return blocks
 	}
 
 	log.Printf("Response ProcessCommand: %v", r)
-	return r
+	return TextMessage(r)
 }
 
 func itemExists(arrayType interface{}, item interface{}) bool {
@@ -106,14 +109,7 @@ func itemExists(arrayType interface{}, item interface{}) bool {
 	return false
 }
 
-// func (gs *GameState) move(cmd string, u string, r Room) {
-// 	newRoom := r.Exits[cmd]
-// 	if newRoom != (Exit{}) {
-// 		gs.Players[u].CurrentRoom = newRoom.Destination
-// 	}
-// }
-
-func (p *Player) move(cmd string, r Room) {
+func (p *Player) move(cmd string, r *Room) {
 	newRoom := r.Exits[cmd]
 	if newRoom != (Exit{}) {
 		p.CurrentRoom = newRoom.Destination

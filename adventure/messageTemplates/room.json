@@ -1,0 +1,28 @@
+{
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "{{ .Description }}"
+			}
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "*There are exits to the:*\n {{ .Exits }}"
+			}
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "*Items:*"
+			}
+		}
+	]
+}
